@@ -16,8 +16,8 @@ singlesheet = None
 #sheet_obj = wb_obj.active 
 print(wb_obj.sheetnames)
 sheetname = wb_obj.sheetnames
-singlesheet = wb_obj[sheetname[17]]
-sheet_obj = wb_obj[sheetname[17]]
+singlesheet = wb_obj[sheetname[1]]
+sheet_obj = wb_obj[sheetname[1]]
   
 # Cell objects also have a row, column,  
 # and coordinate attributes that provide 
@@ -33,21 +33,16 @@ cell_obj = sheet_obj.cell(row = 1, column = 1)
 
 
 data = {}
-data['product_name'] = wb_obj.sheetnames[17]
-data['total_months'] = sheet_obj.cell(row = 24, column = 1).value
-data['total_amount_of_payment'] = sheet_obj.cell(row = 25, column = 2).value
-data['total_divident'] = sheet_obj.cell(row = 25, column = 3).value
+data['product_name'] = wb_obj.sheetnames[1]  # sheet index value
+data['total_months'] = sheet_obj.cell(row = 14, column = 1).value # get specfic column value
+data['total_amount_of_payment'] = sheet_obj.cell(row = 15, column = 2).value# get specfic column value
+data['total_divident'] = sheet_obj.cell(row = 15, column = 3).value# get specfic column value
 listmonth = []
 max_col = sheet_obj.max_column 
-print(max_col)
 max_row = sheet_obj.max_row
-print(max_row)
-print(sheet_obj)
 for i in range(5, sheet_obj.max_row+1):
     index = 1
     monthdata = {};
-    print([cell.value for cell in sheet_obj[i]])
-    #print(sheet_obj[i])
     row = None
     row = [cell.value for cell in sheet_obj[i]] # sheet[n] gives nth row (list of cells)
     monthdata['month'] = row[0]
@@ -61,5 +56,5 @@ for i in range(5, sheet_obj.max_row+1):
     
 data['monthly_emi'] = listmonth
 
-with open(wb_obj.sheetnames[17]+'.json', 'w') as json_file:
+with open(wb_obj.sheetnames[1]+'.json', 'w') as json_file: # convert to json file with excel sheet name
     json.dump(data, json_file)
